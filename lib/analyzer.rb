@@ -4,7 +4,7 @@ require 'net/http'
 class Analyzer
   attr_accessor :characters
   
-  def initialize(text)
+  def parse(text)
     @play_details = Nokogiri::XML(text)
   end
   
@@ -14,11 +14,12 @@ class Analyzer
     
   def call
     uri = URI('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml')
-    analyzer = Analyzer.new(Net::HTTP.get(uri))
+    analyzer = Analyzer.new()
+    analyzer.parse(Net::HTTP.get(uri))
     characters = analyzer.characters
     character_lines = {}
     characters.each do |character|
-      character_lines[character.text] = analyzer.lines_for(character.text)
+      puts "Character \"#{character.text}\" spoke => #{analyzer.lines_for(character.text)} lines"
     end
   end
   
@@ -41,3 +42,6 @@ class Analyzer
   end
   
 end
+# Uncomment the following line to print the lines spoken by each character
+#
+# Analyzer.new.call

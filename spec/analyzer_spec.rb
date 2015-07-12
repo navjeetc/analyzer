@@ -84,23 +84,22 @@ describe 'Analyze' do
     </PLAY>
 
 eos
+    @analyzer = Analyzer.new()
+    @analyzer.parse(@play)
     end
+    
     it 'analyzes xml and get number of characters in play' do
-      
-      analyzer = Analyzer.new(@play)
-      characters = analyzer.characters
+      characters = @analyzer.characters
       expect(characters.size).to eql(11)
     end
     
     it 'analyzes xml and gets lines spoken by MACDUFF' do
-      analyzer = Analyzer.new(@play)
-      expect(analyzer.lines_for('MACDUFF')).to eq 6
+      expect(@analyzer.lines_for('MACDUFF')).to eq 6
       
     end
     
     it 'analyzes xml and gets lines spoken by MACBETH' do
-      analyzer = Analyzer.new(@play)
-      expect(analyzer.lines_for('MACBETH')).to eq 8
+      expect(@analyzer.lines_for('MACBETH')).to eq 8
       
     end
   end
