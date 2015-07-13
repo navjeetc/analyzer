@@ -27,21 +27,26 @@ class Analyzer
     speaker_lines = {}
     speaker_lines[character] = 0
     @play_details.xpath('//SPEAKER').each do |speaker|
-      if speaker.text == character
-        count = 0
-        speaker.parent.children.each do |child|
-          case child.name
-            when 'LINE'
-              count = count + 1
-            end
-        end
-        speaker_lines[speaker.text] += count
-      end
+      speaker_lines[character] += line_count(speaker, character)
     end
     speaker_lines[character]
   end
   
 end
+
+def line_count(speaker, character)
+  count = 0
+  if speaker.text == character
+    speaker.parent.children.each do |child|
+      case child.name
+        when 'LINE'
+          count += 1
+        end
+    end
+  end
+  count
+end
+
 # Uncomment the following line to print the lines spoken by each character
 #
-# Analyzer.new.call
+#Analyzer.new.call
