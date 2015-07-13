@@ -34,6 +34,8 @@ class Analyzer
   
 end
 
+private
+
 def line_count(speaker, character)
   count = 0
   if speaker.text == character
