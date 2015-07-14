@@ -2,7 +2,6 @@ require 'nokogiri'
 require 'net/http'
 
 class Analyzer
-  attr_accessor :characters
   
   def parse(text)
     @play_details = Nokogiri::XML(text)
@@ -51,4 +50,4 @@ end
 
 # Uncomment the following line to print the lines spoken by each character
 #
-#Analyzer.new.call
+Analyzer.new.call
