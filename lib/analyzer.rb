@@ -18,7 +18,7 @@ class Analyzer
     characters = analyzer.characters
     character_lines = {}
     characters.each do |character|
-      puts "Character \"#{character.text}\" spoke => #{analyzer.lines_for(character.text)} lines"
+      puts format(character.text, analyzer.lines_for(character.text))
     end
   end
   
@@ -48,6 +48,10 @@ def line_count(speaker, character)
   count
 end
 
+def format(name, linecount)
+  "#{linecount} #{name}"
+end
+
 # Uncomment the following line to print the lines spoken by each character
 #
-Analyzer.new.call
+#Analyzer.new.call
