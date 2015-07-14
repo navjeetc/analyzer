@@ -1,6 +1,9 @@
 require 'nokogiri'
 require 'net/http'
-
+#
+# Performs analysis of script of a play in xml format and prints
+# speaker name and number of lines spoken
+#
 class Analyzer
   
   def parse(text)
@@ -10,7 +13,8 @@ class Analyzer
   def characters
     @play_details.xpath('//PERSONA')
   end
-    
+  
+  # main service method to parse xml and print output  
   def call
     uri = URI('http://www.ibiblio.org/xml/examples/shakespeare/macbeth.xml')
     analyzer = Analyzer.new()
